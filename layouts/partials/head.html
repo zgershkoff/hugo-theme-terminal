@@ -5,6 +5,19 @@
 <meta name="robots" content="noodp" />
 <link rel="canonical" href="{{ .Permalink }}" />
 
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+{{ if (isset $.Site.Params "twitter") }}
+  {{ if (isset $.Site.Params.Twitter "site") }}
+    <meta name="twitter:site" content="{{ $.Site.Params.Twitter.site }}" />
+  {{ end }}
+    <meta name="twitter:image" content="https://zach.industries/img/card.png" />
+    <meta name="twitter:description" content="{{ $.Site.Params.Twitter.description }}" />
+    <meta name="twitter:creator" content="{{ if .IsHome }}{{ $.Site.Params.Twitter.creator }}{{ else if isset .Params "authortwitter" }}{{ .Params.authorTwitter }}{{ else }}{{ .Params.Author }}{{ end }}" />
+{{ end }}
+
+<meta property="og:image" content="{{ .Site.BaseURL}}img/card.png" />
+
 {{ template "_internal/google_analytics.html" . }}
 
 <!-- Theme CSS -->
@@ -28,14 +41,7 @@
   <link rel="shortcut icon" href="{{ printf "img/favicon/%s.png" ($.Site.Params.ThemeColor | default "orange") | absURL }}">
 {{ end }}
 
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary" />
-{{ if (isset $.Site.Params "twitter") }}
-  {{ if (isset $.Site.Params.Twitter "site") }}
-    <meta name="twitter:site" content="{{ $.Site.Params.Twitter.site }}" />
-  {{ end }}
-    <meta name="twitter:creator" content="{{ if .IsHome }}{{ $.Site.Params.Twitter.creator }}{{ else if isset .Params "authortwitter" }}{{ .Params.authorTwitter }}{{ else }}{{ .Params.Author }}{{ end }}" />
-{{ end }}
+
 
 <!-- OG data -->
 <meta property="og:locale" content="{{ $.Site.Language.Lang }}" />
